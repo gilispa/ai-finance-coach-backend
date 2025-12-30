@@ -1,33 +1,22 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 
-from app.database import Base, engine, get_db
-from app.models.expense import Expense
-from app.schemas.expense import ExpenseCreate, ExpenseResponse
+from app.database import Base, engine
+
+from app.routes.expenses import router as expenses_router
+from app.routes.income import router as income_router
+from app.routes.analytics import router as analytics_router
 
 app = FastAPI()
 
+# Create database tables
 Base.metadata.create_all(bind=engine)
+
+# Register routers
+app.include_router(expenses_router)
+app.include_router(income_router)
+app.include_router(analytics_router)
 
 
 @app.get("/")
 def root():
     return {"message": "AI Finance Coach API is running"}
-
-
-@app.post("/expenses", response_model=ExpenseResponse)
-def create_expense(
-    expense: ExpenseCreate,
-    db: Session = Depends(get_db)
-):
-    new_expense = Expense(
-        amount=expense.amount,
-        category=expense.category,
-        description=expense.description
-    )
-
-    db.add(new_expense)
-    db.commit()
-    db.refresh(new_expense)
-
-    return new_expense
