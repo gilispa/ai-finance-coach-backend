@@ -30,7 +30,7 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 ---
 
 ## 📂 Project Structure
-
+```
 backend/
 │
 ├── app/
@@ -58,7 +58,7 @@ backend/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
+```
 
 ---
 
@@ -103,26 +103,40 @@ The AI logic is intentionally isolated in `services/ai.py`.
 ```bash
 git clone https://github.com/your-username/ai-finance-coach-backend.git
 cd ai-finance-coach-backend
-
+```
 ### 2️⃣ Create and activate virtual environment
 ```bash
 python -m venv venv
 venv\Scripts\activate   # Windows
-
+```
 ### 3️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
-
+```
 ### 4️⃣ Set up environment variables
 ```bash
 # Create a .env file in the root directory
 # Add the following variables:
 OPENAI_API_KEY=your_openai_api_key
-
+```
 ### 5️⃣ Run the API
 ```bash
 uvicorn app.main:app --reload
-
+```
 ### 6️⃣ Access the API documentation
 ```bash
-http://127.0.0.1:8000/docs
+http://localhost:8000
+```
+---
+
+### 🧪 Database Notes
+
+- Uses SQLite for development simplicity
+- Tables are created automatically on startup
+- Time-based analytics prevent old data from affecting current insights
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License.
