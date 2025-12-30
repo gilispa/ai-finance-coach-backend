@@ -3,11 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.database import Base, engine, get_db
 from app.models.expense import Expense
-from app.schemas.expense import ExpenseCreate
+from app.schemas.expense import ExpenseCreate, ExpenseResponse
 
 app = FastAPI()
 
-# Create database tables
 Base.metadata.create_all(bind=engine)
 
 
@@ -16,14 +15,15 @@ def root():
     return {"message": "AI Finance Coach API is running"}
 
 
-@app.post("/expenses")
+@app.post("/expenses", response_model=ExpenseResponse)
 def create_expense(
     expense: ExpenseCreate,
     db: Session = Depends(get_db)
 ):
     new_expense = Expense(
-        description=expense.description,
-        amount=expense.amount
+        amount=expense.amount,
+        category=expense.category,
+        description=expense.description
     )
 
     db.add(new_expense)
