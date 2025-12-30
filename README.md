@@ -125,7 +125,7 @@ uvicorn app.main:app --reload
 ```
 ### 6️⃣ Access the API documentation
 ```bash
-http://localhost:8000
+http://127.0.0.1:8000/docs
 ```
 ---
 
