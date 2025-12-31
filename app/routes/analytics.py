@@ -147,7 +147,8 @@ def spending_risk(db: Session = Depends(get_db)):
 def ai_advice(db: Session = Depends(get_db)):
     insights = {
         "top_spending_category": get_top_spending_category(db),
-        "spending_risk": get_spending_risk(db)
+        "spending_risk": get_spending_risk(db),
+        "micro_expenses": get_micro_expenses(db)
     }
 
     advice = generate_financial_advice(insights)
