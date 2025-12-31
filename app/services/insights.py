@@ -2,17 +2,18 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from sqlalchemy import extract
 from app.models.income import Income
-
+from app.models.category import Category
 from app.models.expense import Expense
 
 
-def get_top_spending_category(db: Session):
+def get_top_spending_category(db):
     result = (
         db.query(
-            Expense.category,
+            Category.name.label("category"),
             func.sum(Expense.amount).label("total")
         )
-        .group_by(Expense.category)
+        .join(Expense, Expense.category_id == Category.id)
+        .group_by(Category.name)
         .order_by(func.sum(Expense.amount).desc())
         .first()
     )
@@ -24,20 +25,20 @@ def get_top_spending_category(db: Session):
 
     return {
         "category": category,
-        "total": total
+        "total": round(total, 2)
     }
 
 
-def get_micro_expenses(db: Session, threshold: float = 200):
+def get_micro_expenses(db, threshold: float = 50):
     results = (
         db.query(
-            Expense.category,
+            Category.name.label("category"),
             func.count(Expense.id).label("count"),
             func.sum(Expense.amount).label("total")
         )
+        .join(Expense, Expense.category_id == Category.id)
         .filter(Expense.amount <= threshold)
-        .group_by(Expense.category)
-        .having(func.count(Expense.id) >= 3)
+        .group_by(Category.name)
         .order_by(func.sum(Expense.amount).desc())
         .all()
     )
@@ -46,7 +47,7 @@ def get_micro_expenses(db: Session, threshold: float = 200):
         {
             "category": category,
             "count": count,
-            "total": total
+            "total": round(total, 2)
         }
         for category, count, total in results
     ]

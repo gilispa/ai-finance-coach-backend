@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from app.database import get_db
 from app.models.expense import Expense
 from app.models.income import Income
+from app.models.category import Category
 from sqlalchemy import extract
 from app.services.insights import get_top_spending_category
 from app.services.insights import get_micro_expenses
@@ -56,10 +57,12 @@ def get_summary(
 def expenses_by_category(db: Session = Depends(get_db)):
     results = (
         db.query(
-            Expense.category,
+            Category.name.label("category"),
             func.sum(Expense.amount).label("total")
         )
-        .group_by(Expense.category)
+        .join(Expense, Expense.category_id == Category.id)
+        .group_by(Category.name)
+        .order_by(func.sum(Expense.amount).desc())
         .all()
     )
 

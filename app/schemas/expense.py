@@ -3,18 +3,18 @@ from datetime import datetime
 from typing import Optional
 
 
-class ExpenseBase(BaseModel):
+class ExpenseCreate(BaseModel):
     amount: float
-    category: str
+    category_id: int
     description: Optional[str] = None
 
 
-class ExpenseCreate(ExpenseBase):
-    pass
 
-
-class ExpenseResponse(ExpenseBase):
+class ExpenseResponse(BaseModel):
     id: int
+    amount: float
+    category: str
+    description: Optional[str]
     created_at: datetime
 
     class Config:
