@@ -8,18 +8,19 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 
 ## 🚀 Features
 
-- Track **expenses** with categories and descriptions
-- Track **income** from multiple sources
-- Financial **analytics** with time-based filtering
-- Detection of **spending patterns** and micro-expenses
-- AI-powered **financial coaching insights**
-- Clean REST API with interactive documentation
+-Track expenses with normalized categories and optional descriptions
+-Track income from multiple sources
+-Time-based financial analytics to avoid outdated data bias
+-Detection of spending patterns and micro-expenses
+-AI-powered financial coaching with actionable, non-judgmental advice
+-RESTful API with interactive documentation (Swagger UI)
+-Scalable architecture ready for frontend, mobile, or deployment use
 
 ---
 
 ## 🧱 Tech Stack
 
-- **Python 3.11**
+- **Python 3.10**
 - **FastAPI** – API framework
 - **SQLAlchemy** – ORM
 - **SQLite** – Local database (development)
@@ -29,32 +30,47 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 
 ---
 
+## 🔗 Frontend Integration
+
+This backend is designed to work alongside a separate frontend application.
+-The frontend is built as an independent project and lives in a separate repository
+-Communication is handled through a REST API over HTTP
+-The frontend consumes analytics, expense, income, category, and AI advice endpoints exposed by this backend
+
+👉 Frontend repository:
+https://github.com/gilispa/ai-finance-coach-frontend
+
+---
+
 ## 📂 Project Structure
 ```
 backend/
 │
 ├── app/
 │ ├── main.py # FastAPI app entry point
-│ │
 │ ├── database.py # Database configuration & session
 │ │
 │ ├── models/ # SQLAlchemy models
 │ │ ├── expense.py
-│ │ └── income.py
+│ │ ├── income.py
+│ │ └── category.py
 │ │
 │ ├── schemas/ # Pydantic schemas
 │ │ ├── expense.py
-│ │ └── income.py
+│ │ ├── income.py
+│ │ └── category.py
 │ │
 │ ├── routes/ # API routes
 │ │ ├── expenses.py
 │ │ ├── income.py
-│ │ └── analytics.py
+│ │ ├── analytics.py
+│ │ └── categories.py
 │ │
-│ └── services/ # Business logic & integrations
-│ └── ai.py # OpenAI integration
-│ └── insights.py # Financial insights generation
-│
+│ ├── services/ # Business logic & integrations
+│ │ ├── ai.py # OpenAI integration
+│ │ └── insights.py # Financial insights generation
+│ │
+│ │
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -75,6 +91,17 @@ backend/
 ### Analytics
 - `GET /summary?days=30` – Financial summary for a time window
 - `GET /analytics/summary?days=30` – Analytics + AI insights
+- `GET /analytics/expenses-by-category?days=30` – Expenses by category
+- `GET /analytics/recent-expenses?days=30` – Recent expenses
+- `GET /analytics/ai-advice?days=30` – AI advice for a time window
+- `GET /analytics/monthly` – Monthly income vs expenses
+- `GET /analytics/top-category` – Top category by total amount 
+- `GET /analytics/micro-expenses` – Micro-expense detection
+- `GET /analytics/spending-risk` – Spending risk evaluation
+
+### Categories
+- `GET /categories` – List all categories
+- `POST /categories` – Create a new category
 
 All analytics endpoints support **time-based filtering** to avoid old data affecting current insights.
 
