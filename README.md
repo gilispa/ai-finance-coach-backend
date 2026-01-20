@@ -1,4 +1,4 @@
-# 🧠 AI Finance Coach – Backend
+# 🤖 AI Finance Coach – Backend
 
 Backend API for **AI Finance Coach**, a personal finance analytics and coaching MVP that helps users understand their spending habits, track income and expenses, and receive AI-powered financial insights.
 
@@ -18,7 +18,7 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 - **Python 3.10**
 - **FastAPI** – API framework
@@ -30,7 +30,7 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 
 ---
 
-## 🔗 Frontend Integration
+## Frontend Integration
 
 This backend is designed to work alongside a separate frontend application.
 -The frontend is built as an independent project and lives in a separate repository
@@ -78,7 +78,7 @@ backend/
 
 ---
 
-## 📊 API Endpoints Overview
+## API Endpoints Overview
 
 ### Expenses
 - `POST /expenses` – Create a new expense
@@ -107,7 +107,7 @@ All analytics endpoints support **time-based filtering** to avoid old data affec
 
 ---
 
-## 🤖 AI Financial Coaching
+##  AI Financial Coaching
 
 The AI layer analyzes:
 - Spending distribution
@@ -124,7 +124,7 @@ The AI logic is intentionally isolated in `services/ai.py`.
 
 ---
 
-## ⚙️ Environment Setup
+## Environment Setup
 
 ### 1️⃣ Clone the repository
 ```bash
@@ -156,7 +156,7 @@ http://127.0.0.1:8000/docs
 ```
 ---
 
-### 🧪 Database Notes
+### Database Notes
 
 - Uses SQLite for development simplicity
 - Tables are created automatically on startup
