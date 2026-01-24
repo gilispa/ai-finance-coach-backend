@@ -1,4 +1,4 @@
-# 🤖 AI Finance Coach – Backend
+#  AI Finance Coach – Backend
 
 Backend API for **AI Finance Coach**, a personal finance analytics and coaching MVP that helps users understand their spending habits, track income and expenses, and receive AI-powered financial insights.
 
@@ -6,7 +6,7 @@ This project is designed as a **real-world backend system**, not a demo app, wit
 
 ---
 
-## 🚀 Features
+##  Features
 
 -Track expenses with normalized categories and optional descriptions
 -Track income from multiple sources
@@ -37,7 +37,7 @@ This backend is designed to work alongside a separate frontend application.
 -Communication is handled through a REST API over HTTP
 -The frontend consumes analytics, expense, income, category, and AI advice endpoints exposed by this backend
 
-👉 Frontend repository:
+ Frontend repository:
 https://github.com/gilispa/ai-finance-coach-frontend
 
 ---
